@@ -3,44 +3,58 @@ import datetime
 import random
 
 # ----------------- Custom CSS Styling -----------------
-st.markdown(
-    <style>
-    body {
-        background-color: #f0f4f8;
-    }
-    .main {
-        background-color: #ffffff;
-        padding: 20px;
-        border-radius: 15px;
-        box-shadow: 0px 4px 12px rgba(0,0,0,0.1);
-    }
-    h1 {
-        color: #4a90e2;
-        text-align: center;
-        font-family: 'Trebuchet MS', sans-serif;
-    }
-    h2, h3 {
-        color: #333333;
-        font-family: 'Trebuchet MS', sans-serif;
-    }
-    .stButton>button {
-        background: linear-gradient(135deg, #4a90e2, #63cdda);
-        color: white;
-        border: none;
-        border-radius: 12px;
-        padding: 8px 16px;
-        font-size: 16px;
-        font-weight: bold;
-    }
-    .stButton>button:hover {
-        background: linear-gradient(135deg, #63cdda, #4a90e2);
-    }
-    .stTextInput, .stTextArea, .stDateInput, .stSelectbox {
-        border-radius: 10px;
-        border: 1px solid #ddd;
-    }
-    </style>
-, unsafe_allow_html=True)
+st.markdown("""
+<style>
+/* Main app background */
+[data-testid="stAppViewContainer"] {
+    background-color: #f0f4f8;
+}
+
+/* Sidebar background */
+[data-testid="stSidebar"] {
+    background-color: #dbe9f4;
+}
+
+/* Cards / main content container */
+[data-testid="stMarkdownContainer"] {
+    background-color: #ffffff;
+    padding: 20px;
+    border-radius: 15px;
+    box-shadow: 0px 4px 12px rgba(0,0,0,0.1);
+}
+
+/* Titles and subtitles */
+h1 {
+    color: #4a90e2;
+    text-align: center;
+    font-family: 'Trebuchet MS', sans-serif;
+}
+h2, h3 {
+    color: #333333;
+    font-family: 'Trebuchet MS', sans-serif;
+}
+
+/* Buttons */
+.stButton>button {
+    background: linear-gradient(135deg, #4a90e2, #63cdda);
+    color: white;
+    border: none;
+    border-radius: 12px;
+    padding: 8px 16px;
+    font-size: 16px;
+    font-weight: bold;
+}
+.stButton>button:hover {
+    background: linear-gradient(135deg, #63cdda, #4a90e2);
+}
+
+/* Inputs */
+.stTextInput, .stTextArea, .stDateInput, .stSelectbox {
+    border-radius: 10px;
+    border: 1px solid #ddd;
+}
+</style>
+""", unsafe_allow_html=True)
 
 # ----------------- Session State -----------------
 if "moods" not in st.session_state:
@@ -78,7 +92,7 @@ if st.button("➕ Add Entry"):
     st.session_state.mood = "😊 Happy"
     st.session_state.note = ""
 
-    st.experimental_rerun()
+    st.rerun()
 
 # ----------------- Read Entries -----------------
 st.subheader("📖 Your Mood Journal")
@@ -100,7 +114,7 @@ else:
                     if st.button("💾 Save", key=f"save_{i}"):
                         st.session_state.moods[i]["mood"] = new_mood
                         st.session_state.moods[i]["note"] = new_note
-                        st.experimental_rerun()
+                        st.rerun()
             with col2:
                 if st.button("❌ Delete", key=f"delete_{i}"):
                     st.session_state.moods.pop(i)
