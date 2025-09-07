@@ -3,7 +3,7 @@ import datetime
 import random
 
 # ----------------- Custom CSS Styling -----------------
-st.markdown("""
+st.markdown(
     <style>
     body {
         background-color: #f0f4f8;
@@ -40,7 +40,7 @@ st.markdown("""
         border: 1px solid #ddd;
     }
     </style>
-""", unsafe_allow_html=True)
+, unsafe_allow_html=True)
 
 # ----------------- Session State -----------------
 if "moods" not in st.session_state:
@@ -53,7 +53,7 @@ if "note" not in st.session_state:
     st.session_state.note = ""
 
 # ----------------- App Title -----------------
-st.title("🌙 Mood Journal App")
+st.title(" Mood Journal App")
 
 # ----------------- Create Entry -----------------
 st.subheader("📝 Add Your Mood Entry")
@@ -104,7 +104,7 @@ else:
             with col2:
                 if st.button("❌ Delete", key=f"delete_{i}"):
                     st.session_state.moods.pop(i)
-                    st.experimental_rerun()
+                    st.rerun()
 
 # ----------------- AI Weekly Summary -----------------
 st.subheader("🤖 Weekly Mood Summary")
